@@ -36,7 +36,7 @@ public class User implements UserDetails {
     private Date updatedAt;
 
     @OneToMany(mappedBy = "user")
-    private Set<UserJwtToken> tokens;
+    private List<UserJwtToken> tokens;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

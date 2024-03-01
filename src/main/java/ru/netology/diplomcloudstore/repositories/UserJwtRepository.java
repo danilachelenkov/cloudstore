@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.netology.diplomcloudstore.entities.UserJwtToken;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -31,14 +32,14 @@ public interface UserJwtRepository extends CrudRepository<UserJwtToken, Long> {
 
 
     //Добавляем запись сгенерированого токена для конкретного пользователя на каждую попытку генерации
-    @Modifying
+/*    @Modifying
     @Query(value = "insert into diplom_netology_db.users_jwt_blacklist (actual, jwt, user_id) " +
                    "select CURRENT_TIMESTAMP, :jwt, u.id " +
                    "  from diplom_netology_db.users u\n" +
                    " where u.email = :username",
             nativeQuery = true)
     @Transactional
-    void insertJwt(@Param("username") String username, @Param("jwt") String jwt);
+    void insertJwt(@Param("username") String username, @Param("jwt") String jwt);*/
 
     //logout удаление всех записей о токене для конгкретного пользователя
     @Modifying
@@ -49,4 +50,12 @@ public interface UserJwtRepository extends CrudRepository<UserJwtToken, Long> {
             nativeQuery = true)
     @Transactional
     void deleteJwt(@Param("username") String username);
+
+    @Query("""
+            select t from UserJwtToken t inner join User u on t.user.id = u.id
+            where u.username = :username and (t.expired = false or t.revoke = false)
+            """)
+    List<UserJwtToken> findAllValidUserJwtTokenByUser(@Param("username") String username);
+
+    Optional<UserJwtToken> findByJwt(String jwt);
 }

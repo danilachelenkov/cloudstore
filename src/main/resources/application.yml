@@ -29,5 +29,5 @@ netology:
     jwt:
       secret:
         key: NetologyDiplomaJavaCloudStoreJwtSecretKeyForMyHomeWork
-        expiration: 1000
+        expiration: 20_000
 

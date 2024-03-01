@@ -8,6 +8,6 @@ public class TestControler {
 
     @GetMapping("/cloud/data")
     public String getData(){
-        return "data";
+        return "data success getting";
     }
 }

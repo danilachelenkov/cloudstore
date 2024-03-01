@@ -15,6 +15,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
+import ru.netology.diplomcloudstore.repositories.UserJwtRepository;
 import ru.netology.diplomcloudstore.services.JwtService;
 
 import java.io.IOException;
@@ -25,14 +26,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
 
+    private final UserJwtRepository userJwtRepository;
+
     public JwtAuthenticationFilter(
             JwtService jwtService,
             UserDetailsService userDetailsService,
-            HandlerExceptionResolver handlerExceptionResolver
+            HandlerExceptionResolver handlerExceptionResolver,
+            UserJwtRepository userJwtRepository
     ) {
         this.jwtService = jwtService;
         this.userDetailsService = userDetailsService;
         this.handlerExceptionResolver = handlerExceptionResolver;
+        this.userJwtRepository = userJwtRepository;
     }
 
     @Override
@@ -58,7 +63,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             if (userEmail != null && authentication == null) {
                 UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
 
-                if (jwtService.isTokenValid(jwt, userDetails)) {
+
+                var isJwtTokenValid = userJwtRepository.findByJwt(jwt)
+                        .map(token -> !token.isExpired() && !token.isRevoke())
+                        .orElse(false);
+
+                if (jwtService.isTokenValid(jwt, userDetails) && isJwtTokenValid) {
                     UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                             userDetails,
                             null,
@@ -69,12 +79,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     SecurityContextHolder.getContext().setAuthentication(authToken);
                 }
             }
-
             filterChain.doFilter(request, response);
-        } catch (ExpiredJwtException e){
-            //todo переопределить, чтобы не было 200 OK (перехватывать через Advice и отдавать 400)
-            String s = "";
-        }catch (Exception exception) {
+
+        } catch (ExpiredJwtException e) {
+            throw e;
+        } catch (Exception exception) {
             handlerExceptionResolver.resolveException(request, response, null, exception);
         }
     }

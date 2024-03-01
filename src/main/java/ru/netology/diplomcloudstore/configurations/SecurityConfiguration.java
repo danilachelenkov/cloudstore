@@ -7,16 +7,19 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
+import ru.netology.diplomcloudstore.services.LogoutService;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfiguration {
-
     private final AuthenticationProvider authenticationProvider;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final LogoutHandler logoutHandler;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -32,9 +35,15 @@ public class SecurityConfiguration {
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout()
-                .logoutUrl("/perform_logout")
-                .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID");
+                .logoutUrl("/cloud/logout")
+                .addLogoutHandler(logoutHandler)
+                .logoutSuccessHandler(
+                        (request, response, authentication) ->
+                        SecurityContextHolder.clearContext()
+                );
+
+   /*             .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID");*/
 
      /*   .logout
                 .addLogoutHandler(null)

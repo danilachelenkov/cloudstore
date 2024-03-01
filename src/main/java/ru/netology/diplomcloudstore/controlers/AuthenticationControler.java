@@ -35,16 +35,16 @@ public class AuthenticationControler {
         return new ResponseEntity<>(new LoginResponse(jwtToken), HttpStatus.OK);
     }
 
-    @PostMapping("/cloud/logout")
+   /* @PostMapping("/cloud/logout")
     public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("@PostMapping(\"/cloud/logout\")");
+
 
         //todo подумать как удалить запись jwt и где она проверяется
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         if (auth != null) {
             User currentUser = (User) auth.getPrincipal();
-            jwtService.deleteJwtFromDB(currentUser.getUsername());
+          //  jwtService.deleteJwtFromDB(currentUser.getUsername());
 
             SecurityContextLogoutHandler securityContextLogoutHandler = new SecurityContextLogoutHandler();
             securityContextLogoutHandler.setInvalidateHttpSession(true);
@@ -70,5 +70,5 @@ public class AuthenticationControler {
         SecurityContextHolder.clearContext();
 
         return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
-    }
+    }*/
 }
