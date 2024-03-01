@@ -1,0 +1,33 @@
+#Service settings
+server:
+  port: 8081
+
+#Database settings
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/JavaMicro
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: 12345678Ll
+
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        default_schema: diplom_netology_db
+    hibernate:
+      ddl-auto: update
+
+  sql:
+    init:
+      mode: always
+      continue-on-error: true
+
+#Custom settings for my token
+netology:
+    jwt:
+      secret:
+        key: NetologyDiplomaJavaCloudStoreJwtSecretKeyForMyHomeWork
+        expiration: 1000
+
