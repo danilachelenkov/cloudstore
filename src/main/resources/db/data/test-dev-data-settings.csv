@@ -1,0 +1,5 @@
+is_active,setting_name,setting_value
+true,"expired","20000000000"
+true,"secret","NetologyDiplomaJavaCloudStoreJwtSecretKeyForMyHomeWork333131HappyWork"
+true,"cloudDiskPath","c:\cloudstore"
+true,"doDelete","false"

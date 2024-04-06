@@ -1,0 +1,33 @@
+version: '1.0.0'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.development
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - PORT=8081
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres/javamicro
+    volumes:
+      - /c/cloudstore/data/files:/storage/data
+      - /c/cloudstore/data/logs:/logs
+    image: 'cloudstore:latest'
+    ports:
+      - 8081:8081
+    depends_on:
+      - postgres
+  postgres:
+    image: 'postgres:latest'
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=javamicro
+      - POSTGRES_PASSWORD=mysecretpassword
+    volumes:
+      - ./infrastructure/db/create_scheme.sql:/docker-entrypoint-initdb.d/create_scheme.sql
+      - db-data-new:/var/lib/postgresql/data
+
+volumes:
+  db-data-new:

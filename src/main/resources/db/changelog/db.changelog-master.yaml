@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: v1/v1-accumulative-changelog.xml
+      relativeToChangelogFile: true
+  - include:
+      file: v2/v2-accumulative-changelog.xml
+      relativeToChangelogFile: true

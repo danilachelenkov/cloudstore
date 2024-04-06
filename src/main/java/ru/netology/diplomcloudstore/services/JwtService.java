@@ -4,34 +4,30 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.io.DecodingException;
 import io.jsonwebtoken.security.Keys;
-import lombok.RequiredArgsConstructor;
 
-import org.springframework.beans.factory.annotation.Value;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.netology.diplomcloudstore.entities.User;
-import ru.netology.diplomcloudstore.entities.UserJwtToken;
+import ru.netology.diplomcloudstore.domain.ProgramSettings;
+import ru.netology.diplomcloudstore.entities.UserEntity;
+import ru.netology.diplomcloudstore.entities.UserJwtTokenEntity;
 import ru.netology.diplomcloudstore.repositories.UserJwtRepository;
-import ru.netology.diplomcloudstore.repositories.UserRepository;
 
 import java.security.Key;
 import java.util.*;
 import java.util.function.Function;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class JwtService {
-    @Value("${netology.jwt.secret.key}")
-    private String secretKey;
-
-    @Value("${netology.jwt.secret.expiration}")
-    private long jwtExpiration;
-
-    private final UserRepository userRepository;
     private final UserJwtRepository userJwtRepository;
+    private final ProgramSettings programSettings;
 
     public String extractUsername(String token) {
         return extractClaim(token, claims -> claims.getSubject());
@@ -42,70 +38,41 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
 
-    public String generateToken(UserDetails userDetails) {
-        String jwtToken = generateToken(new HashMap<>(), userDetails);
+    public String generateToken(UserEntity user) {
+        log.debug("JwtService.saveUserJwtToken.Stage1: Start generate Jwt token...");
 
-        revokeAllUserJwtTokens(userDetails.getUsername());
-        saveUserJwtToken(jwtToken, userDetails.getUsername());
+        String jwtToken = generateToken(new HashMap<>(), user);
+        log.debug(String.format("JwtService.saveUserJwtToken.Stage2: The Jwt token is generated as '%s'", jwtToken));
 
+        revokeAllUserJwtTokens(user.getUsername());
+        log.debug(String.format("JwtService.saveUserJwtToken.Stage3: All old Jwt tokens was marked is revoked and expired for user '%s'", user.getUsername()));
+
+        saveUserJwtToken(jwtToken, user);
+        log.debug(String.format("JwtService.saveUserJwtToken.Stage4: The Jwt token was saved to database jwt-table for user '%s'", user.getUsername()));
         return jwtToken;
     }
 
-    private void saveUserJwtToken(String jwtToken, String username) {
-        Optional<User> currentUser = userRepository.findByUsername(username);
-
-        if (currentUser.isPresent()) {
-            User user = currentUser.get();
-
-            UserJwtToken token = UserJwtToken.builder()
-                    .jwt(jwtToken)
-                    .expired(false)
-                    .revoke(false)
-                    .user(user)
-                    .build();
-
-            userJwtRepository.save(token);
-        } else {
-            throw new UsernameNotFoundException("User not found in database. Check the login");
-        }
-    }
-
-    public String getJwtFromDb(String username) {
-
-        Optional<UserJwtToken> userJwtToken = userJwtRepository.findUserJwtTokenByUserAndActual(username);
-        if (userJwtToken.isPresent()) {
-            return userJwtToken.get().getJwt();
-        }
-
-        return "";
-    }
-
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
-        return buildToken(extraClaims, userDetails, jwtExpiration);
+        return buildToken(extraClaims, userDetails, programSettings.getExpiration());
     }
 
-    public long getExpirationTime() {
-        //todo брать из базы
-        return jwtExpiration;
+    @Transactional
+    public void saveUserJwtToken(String jwtToken, UserEntity user) {
+        UserJwtTokenEntity token = UserJwtTokenEntity.builder()
+                .jwt(jwtToken)
+                .createDate(new Date())
+                .expired(false)
+                .revoke(false)
+                .user(user)
+                .build();
+
+        userJwtRepository.save(token);
+        log.debug(String.format("JwtService.saveUserJwtToken: The Jwt token '%s' is generated successful for user:%s", token, user.getUsername()));
     }
 
-    public String getSecretKey() {
-        //todo брать из базы
-        return "";
-    }
 
-
-    public void deleteJwtFromDB(String username) {
-        userJwtRepository.deleteJwt(username);
-    }
-
-    private String buildToken(
-            Map<String, Object> extraClaims,
-            UserDetails userDetails,
-            long expiration
-    ) {
-        return Jwts
-                .builder()
+    private String buildToken(Map<String, Object> extraClaims, UserDetails userDetails, Long expiration) {
+        return Jwts.builder()
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
@@ -115,30 +82,33 @@ public class JwtService {
     }
 
 
-    private void revokeAllUserJwtTokens(String username) {
-        List<UserJwtToken> validUserTokens = userJwtRepository.findAllValidUserJwtTokenByUser(username);
+    @Transactional
+    public void revokeAllUserJwtTokens(String username) {
+        List<UserJwtTokenEntity> validUserTokens = userJwtRepository.findAllValidUserJwtTokenByUser(username);
         if (validUserTokens.isEmpty()) {
+            log.debug(String.format("JwtService.revokeAllUserJwtTokens: Valid Jwt tokens for User:'%s' not found in database", username));
             return;
         }
-        validUserTokens.forEach(t -> t.setRevoke(true));
+
+        validUserTokens.forEach(t -> {
+            t.setRevoke(true);
+            t.setExpired(true);
+        });
+
         userJwtRepository.saveAll(validUserTokens);
+        log.debug(String.format("JwtService.revokeAllUserJwtTokens: All %d Jwt tokens for user  was revoked", validUserTokens.size()));
     }
+
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
 
         return (username.equals(userDetails.getUsername()))
-                && !isTokenExpired(token)
-                && checkTokenFromDb(username, token);
+                && !isTokenExpired(token);
     }
 
-    private boolean checkTokenFromDb(String username, String token) {
-        return getJwtFromDb(username).equals(token);
-    }
 
     private boolean isTokenExpired(String token) {
-        //todo проверить как работает протухание
-        String s = "";
         return extractExpiration(token).before(new Date());
     }
 
@@ -147,18 +117,23 @@ public class JwtService {
     }
 
     private Claims extractAllClaims(String token) {
-        Claims claims = Jwts
+        return Jwts
                 .parserBuilder()
                 .setSigningKey(getSignInKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
-        return claims;
     }
 
-    private Key getSignInKey() {
-        //todo получать secret из БД по максимальной дате и всегда первое значение в запросе
-        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
+    private Key getSignInKey() throws DecodingException {
+        byte[] keyBytes;
+        try {
+            keyBytes = Decoders.BASE64.decode(programSettings.getSecret());
+        } catch (DecodingException ex) {
+            String msg = "JwtService.getSignInKey: Decode the secret key create decoding exception. Check the secret key in database settings table";
+            log.error(msg);
+            throw new DecodingException(String.join(" ", msg, ex.getMessage()));
+        }
         return Keys.hmacShaKeyFor(keyBytes);
     }
 }

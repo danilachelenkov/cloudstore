@@ -11,11 +11,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
-import ru.netology.diplomcloudstore.services.LogoutService;
 
 @Configuration
-@EnableWebSecurity
 @RequiredArgsConstructor
+@EnableWebSecurity
 public class SecurityConfiguration {
     private final AuthenticationProvider authenticationProvider;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
@@ -39,33 +38,9 @@ public class SecurityConfiguration {
                 .addLogoutHandler(logoutHandler)
                 .logoutSuccessHandler(
                         (request, response, authentication) ->
-                        SecurityContextHolder.clearContext()
+                                SecurityContextHolder.clearContext()
                 );
-
-   /*             .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID");*/
-
-     /*   .logout
-                .addLogoutHandler(null)
-                .logoutSuccessHandler(
-                        (request, response, authentication) -> SecurityContextHolder.clearContext()
-                )*/
 
         return http.build();
     }
-
-/*    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-
-        configuration.setAllowedOrigins(List.of("http://localhost:8080"));
-        configuration.setAllowedMethods(List.of("GET","POST","PUT", "DELETE"));
-        configuration.setAllowedHeaders(List.of("Authorization","Content-Type"));
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-
-        source.registerCorsConfiguration("/**",configuration);
-
-        return source;
-    }*/
 }

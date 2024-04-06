@@ -133,7 +133,7 @@ paths:
           description: File name to download
       responses:
         '200':
-          description: Success deleted
+          description: Success upload
           content:
             multipart/form-data:
               schema:

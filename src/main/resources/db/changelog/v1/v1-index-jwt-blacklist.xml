@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="v1-index-jwt-1" author="Chelenkov Danila">
+        <preConditions>
+            <not>
+                <indexExists tableName="users_jwt_blacklist" indexName="atomic_jwt_index_1"/>
+            </not>
+        </preConditions>
+        <createIndex tableName="users_jwt_blacklist" indexName="atomic_jwt_index_1">
+            <column name="jwt"/>
+        </createIndex>
+        <rollback>
+            <dropIndex tableName="users_jwt_blacklist" indexName="atomic_jwt_index_1"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="v1-index-jwt-2" author="Chelenkov Danila">
+        <preConditions>
+            <not>
+                <indexExists tableName="users_jwt_blacklist" indexName="composite_jwt_index_1"/>
+            </not>
+        </preConditions>
+        <createIndex tableName="users_jwt_blacklist" indexName="composite_jwt_index_1">
+            <column name="user_id"/>
+            <column name="revoke"/>
+            <column name="expired"/>
+        </createIndex>
+        <rollback>
+            <dropIndex tableName="users_jwt_blacklist" indexName="composite_jwt_index_1"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

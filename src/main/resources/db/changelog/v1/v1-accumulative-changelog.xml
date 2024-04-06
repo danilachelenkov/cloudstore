@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <include file="v1-table-users.xml" relativeToChangelogFile="true"/>
+    <include file="v1-table-files.xml" relativeToChangelogFile="true"/>
+    <include file="v1-table-jwt-blacklist.xml" relativeToChangelogFile="true"/>
+    <include file="v1-table-settings.xml" relativeToChangelogFile="true"/>
+
+    <include file="v1-index-users.xml" relativeToChangelogFile="true"/>
+    <include file="v1-index-jwt-blacklist.xml" relativeToChangelogFile="true"/>
+
+    <include file="v1-load-data-users.xml" relativeToChangelogFile="true"/>
+    <include file="v1-load-data-settings.xml" relativeToChangelogFile="true"/>
+
+</databaseChangeLog>

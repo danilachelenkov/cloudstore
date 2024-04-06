@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="v1-index-users-1" author="Chelenkov Danila">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <tableExists tableName="users"/>
+            </and>
+            <and>
+                <not>
+                    <indexExists indexName="atomic_user_index_1" tableName="users"/>
+                </not>
+            </and>
+        </preConditions>
+        <createIndex tableName="users" indexName="atomic_user_index_1">
+            <column name="email">
+                <constraints unique="true"/>
+            </column>
+        </createIndex>
+        <rollback>
+            <dropIndex tableName="users" indexName="atomic_user_index_1"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

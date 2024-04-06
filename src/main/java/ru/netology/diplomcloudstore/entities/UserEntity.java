@@ -1,19 +1,31 @@
 package ru.netology.diplomcloudstore.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Entity
-@Table(name = "users")
-public class User implements UserDetails {
+@Getter
+@Setter
+//Оставил для примера. Отключил в конфигурации. Все создается через liquibase
+@Table(
+        name = "users",
+        indexes = {
+                @Index(
+                        name = "atomic_user_index_1",
+                        columnList = "email",
+                        unique = true)
+        })
+public class UserEntity implements UserDetails, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,7 +48,10 @@ public class User implements UserDetails {
     private Date updatedAt;
 
     @OneToMany(mappedBy = "user")
-    private List<UserJwtToken> tokens;
+    private List<UserJwtTokenEntity> tokens;
+
+    @OneToMany(mappedBy = "user")
+    private List<FileEntity> files;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

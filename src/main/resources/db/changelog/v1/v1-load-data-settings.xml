@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!--Заполняем для develop-контура-->
+    <changeSet id="v1-data-settings-1" author="Chelenkov Danila" context="dev">
+        <preConditions onFail="MARK_RAN">
+            <tableIsEmpty tableName="settings"/>
+        </preConditions>
+        <loadData tableName="settings" file="db/data/test-dev-data-settings.csv"/>
+    </changeSet>
+
+    <!--Заполняем для production-контура-->
+    <changeSet id="v1-data-settings-2" author="Chelenkov Danila" context="prod">
+        <preConditions onFail="MARK_RAN">
+            <tableIsEmpty tableName="settings"/>
+        </preConditions>
+        <loadData tableName="settings" file="db/data/test-prod-data-settings.csv"/>
+    </changeSet>
+
+    <!--Заполняем для test-контура-->
+    <changeSet id="v1-data-settings-3" author="Chelenkov Danila" context="test">
+        <preConditions onFail="MARK_RAN">
+            <tableIsEmpty tableName="settings"/>
+        </preConditions>
+        <loadData tableName="settings" file="db/data/test-test-data-settings.csv"/>
+    </changeSet>
+
+</databaseChangeLog>

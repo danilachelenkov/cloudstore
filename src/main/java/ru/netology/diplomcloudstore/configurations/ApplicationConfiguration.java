@@ -1,5 +1,7 @@
 package ru.netology.diplomcloudstore.configurations;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -9,22 +11,28 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import ru.netology.diplomcloudstore.domain.ProgramSettings;
+import ru.netology.diplomcloudstore.exceptions.NotFoundSettingInDatabaseException;
+import ru.netology.diplomcloudstore.repositories.SettingRepository;
 import ru.netology.diplomcloudstore.repositories.UserRepository;
+import ru.netology.diplomcloudstore.services.CurrentUserService;
 
 @Configuration
+@Slf4j
+@RequiredArgsConstructor
 public class ApplicationConfiguration {
     private final UserRepository userRepository;
+    private final SettingRepository settingRepository;
 
-    public ApplicationConfiguration(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    @Bean
+    UserDetailsService userDetailsService() throws UsernameNotFoundException {
+        return username -> userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found in database. Check the registration user in database"));
     }
 
     @Bean
-    UserDetailsService userDetailsService() {
-        return username -> {
-            return userRepository.findByUsername(username)
-                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        };
+    public ProgramSettings programSettings() throws NotFoundSettingInDatabaseException {
+        return new ProgramSettings(settingRepository);
     }
 
     @Bean
@@ -38,12 +46,17 @@ public class ApplicationConfiguration {
     }
 
     @Bean
-    AuthenticationProvider authenticationProvider() {
-
+    public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService());
         authProvider.setPasswordEncoder(passwordEncoder());
 
         return authProvider;
     }
+
+    @Bean
+    public CurrentUserService currentUserService(UserRepository userRepository) {
+        return new CurrentUserService(userRepository);
+    }
+
 }

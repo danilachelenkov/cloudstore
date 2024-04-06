@@ -1,0 +1,172 @@
+2024-04-06 13:57:49,167 INFO  [main] ru.netology.diplomcloudstore.DiplomCloudstoreApplicationTests : Starting DiplomCloudstoreApplicationTests using Java 21 with PID 7840 (started by GPB in C:\Programming\Netology\Projects\_diplom\diplom-cloudstore)
+2024-04-06 13:57:49,167 DEBUG [main] ru.netology.diplomcloudstore.DiplomCloudstoreApplicationTests : Running with Spring Boot v3.2.1, Spring v6.1.2
+2024-04-06 13:57:49,168 INFO  [main] ru.netology.diplomcloudstore.DiplomCloudstoreApplicationTests : The following 1 profile is active: "test"
+2024-04-06 13:57:49,750 INFO  [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-04-06 13:57:49,806 INFO  [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 49 ms. Found 4 JPA repository interfaces.
+2024-04-06 13:57:50,349 INFO  [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer : Tomcat initialized with port 0 (http)
+2024-04-06 13:57:50,360 INFO  [main] org.apache.catalina.core.StandardService : Starting service [Tomcat]
+2024-04-06 13:57:50,361 INFO  [main] org.apache.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/10.1.17]
+2024-04-06 13:57:50,412 INFO  [main] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] : Initializing Spring embedded WebApplicationContext
+2024-04-06 13:57:50,412 INFO  [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1233 ms
+2024-04-06 13:57:50,438 WARN  [main] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-04-06 13:57:50,504 INFO  [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Starting...
+2024-04-06 13:57:50,535 INFO  [main] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@106802ea
+2024-04-06 13:57:50,537 INFO  [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Start completed.
+2024-04-06 13:57:51,281 INFO  [main] liquibase.changelog : Creating database history table with name: diplom_netology_db.databasechangelog
+2024-04-06 13:57:51,369 INFO  [main] liquibase.changelog : Reading from diplom_netology_db.databasechangelog
+2024-04-06 13:57:51,379 INFO  [docker-java-stream-1192190679] ru.netology.diplomcloudstore.DiplomCloudstoreApplicationTests : STDERR: 2024-04-06 10:57:51.378 UTC [69] ERROR:  relation "diplom_netology_db.databasechangeloglock" does not exist at character 22
+2024-04-06 13:57:51,379 INFO  [docker-java-stream-1192190679] ru.netology.diplomcloudstore.DiplomCloudstoreApplicationTests : STDERR: 2024-04-06 10:57:51.378 UTC [69] STATEMENT:  SELECT COUNT(*) FROM diplom_netology_db.databasechangeloglock
+2024-04-06 13:57:51,452 INFO  [main] liquibase.lockservice : Successfully acquired change log lock
+2024-04-06 13:57:51,454 INFO  [main] liquibase.command : Using deploymentId: 2401071454
+2024-04-06 13:57:51,457 INFO  [main] liquibase.changelog : Reading from diplom_netology_db.databasechangelog
+2024-04-06 13:57:51,513 INFO  [main] liquibase.changelog : Table users created
+2024-04-06 13:57:51,514 INFO  [main] liquibase.changelog : ChangeSet db/changelog/v1/v1-table-users.xml::v1-table-users-1::Chelenkov Danila ran successfully in 28ms
+2024-04-06 13:57:51,543 INFO  [main] liquibase.changelog : SQL in file v1-create-files-table.sql executed
+2024-04-06 13:57:51,544 INFO  [main] liquibase.changelog : ChangeSet db/changelog/v1/v1-table-files.xml::v1-tables-files-1::Chelenkov Danila ran successfully in 22ms
+2024-04-06 13:57:51,559 INFO  [main] liquibase.changelog : Table users_jwt_blacklist created
+2024-04-06 13:57:51,560 INFO  [main] liquibase.changelog : ChangeSet db/changelog/v1/v1-table-jwt-blacklist.xml::v1-table-jwt-1::Chelenkov Danila ran successfully in 11ms
+2024-04-06 13:57:51,575 INFO  [main] liquibase.changelog : Table settings created
+2024-04-06 13:57:51,576 INFO  [main] liquibase.changelog : ChangeSet db/changelog/v1/v1-table-settings.xml::v1-settings-1::settings ran successfully in 11ms
+2024-04-06 13:57:51,588 INFO  [main] liquibase.changelog : Index atomic_user_index_1 created
+2024-04-06 13:57:51,590 INFO  [main] liquibase.changelog : ChangeSet db/changelog/v1/v1-index-users.xml::v1-index-users-1::Chelenkov Danila ran successfully in 10ms
+2024-04-06 13:57:51,600 INFO  [main] liquibase.changelog : Index atomic_jwt_index_1 created
+2024-04-06 13:57:51,601 INFO  [main] liquibase.changelog : ChangeSet db/changelog/v1/v1-index-jwt-blacklist.xml::v1-index-jwt-1::Chelenkov Danila ran successfully in 8ms
+2024-04-06 13:57:51,612 INFO  [main] liquibase.changelog : Index composite_jwt_index_1 created
+2024-04-06 13:57:51,613 INFO  [main] liquibase.changelog : ChangeSet db/changelog/v1/v1-index-jwt-blacklist.xml::v1-index-jwt-2::Chelenkov Danila ran successfully in 9ms
+2024-04-06 13:57:51,656 INFO  [main] liquibase.changelog : Data loaded from 'db/data/test-data-user.csv' into table 'users'
+2024-04-06 13:57:51,657 INFO  [main] liquibase.changelog : ChangeSet db/changelog/v1/v1-load-data-users.xml::v1-data-users-1::Chelenkov Danila ran successfully in 41ms
+2024-04-06 13:57:51,677 INFO  [main] liquibase.changelog : Data loaded from 'db/data/test-test-data-settings.csv' into table 'settings'
+2024-04-06 13:57:51,678 INFO  [main] liquibase.changelog : ChangeSet db/changelog/v1/v1-load-data-settings.xml::v1-data-settings-3::Chelenkov Danila ran successfully in 17ms
+2024-04-06 13:57:51,687 WARN  [main] liquibase.executor : column "broken_file" of relation "files_cloudstore" already exists, skipping
+2024-04-06 13:57:51,688 INFO  [main] liquibase.changelog : SQL in file v2-add-files-broken.sql executed
+2024-04-06 13:57:51,689 INFO  [main] liquibase.changelog : ChangeSet db/changelog/v2/v2-accumulative-changelog.xml::v2-tables-files-1::Chelenkov Danila ran successfully in 6ms
+2024-04-06 13:57:51,694 INFO  [main] liquibase.util : UPDATE SUMMARY
+2024-04-06 13:57:51,694 INFO  [main] liquibase.util : Run:                         10
+2024-04-06 13:57:51,695 INFO  [main] liquibase.util : Previously run:               0
+2024-04-06 13:57:51,695 INFO  [main] liquibase.util : Filtered out:                 2
+2024-04-06 13:57:51,695 INFO  [main] liquibase.util : -------------------------------
+2024-04-06 13:57:51,695 INFO  [main] liquibase.util : Total change sets:           12
+2024-04-06 13:57:51,695 INFO  [main] liquibase.util : FILTERED CHANGE SETS SUMMARY
+2024-04-06 13:57:51,695 INFO  [main] liquibase.util : Context mismatch:             2
+2024-04-06 13:57:51,696 INFO  [main] liquibase.util : Update summary generated
+2024-04-06 13:57:51,698 INFO  [main] liquibase.command : Update command completed successfully.
+2024-04-06 13:57:51,702 INFO  [main] liquibase.lockservice : Successfully released change log lock
+2024-04-06 13:57:51,703 INFO  [main] liquibase.command : Command execution complete
+2024-04-06 13:57:51,768 INFO  [main] org.hibernate.jpa.internal.util.LogHelper : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-04-06 13:57:51,838 INFO  [main] org.hibernate.Version : HHH000412: Hibernate ORM core version 6.4.1.Final
+2024-04-06 13:57:51,864 INFO  [main] org.hibernate.cache.internal.RegionFactoryInitiator : HHH000026: Second-level cache disabled
+2024-04-06 13:57:52,038 INFO  [main] org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-04-06 13:57:52,076 WARN  [main] org.hibernate.orm.deprecation : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-04-06 13:57:52,822 INFO  [main] org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-04-06 13:57:52,851 INFO  [main] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-04-06 13:57:53,206 INFO  [main] org.springframework.data.jpa.repository.query.QueryEnhancerFactory : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-04-06 13:57:53,801 DEBUG [main] ru.netology.diplomcloudstore.configurations.JwtAuthenticationFilter : Filter 'jwtAuthenticationFilter' configured for use
+2024-04-06 13:57:54,038 INFO  [main] org.springframework.security.web.DefaultSecurityFilterChain : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@79c7d95a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@76f3f810, org.springframework.security.web.context.SecurityContextHolderFilter@1f5bb9fe, org.springframework.security.web.header.HeaderWriterFilter@33df44cd, org.springframework.web.filter.CorsFilter@7d7efdf5, org.springframework.security.web.authentication.logout.LogoutFilter@549f0e14, ru.netology.diplomcloudstore.configurations.JwtAuthenticationFilter@30e1f008, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@48cec56d, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@50de5919, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@74df38c0, org.springframework.security.web.session.SessionManagementFilter@24ae5dd, org.springframework.security.web.access.ExceptionTranslationFilter@2125bb4e, org.springframework.security.web.access.intercept.AuthorizationFilter@2ad4ade7]
+2024-04-06 13:57:54,175 DEBUG [main] ru.netology.diplomcloudstore.configurations.JwtAuthenticationFilter : Filter 'jwtAuthenticationFilter' configured for use
+2024-04-06 13:57:54,176 INFO  [main] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] : Initializing Spring TestDispatcherServlet ''
+2024-04-06 13:57:54,176 INFO  [main] org.springframework.test.web.servlet.TestDispatcherServlet : Initializing Servlet ''
+2024-04-06 13:57:54,177 INFO  [main] org.springframework.test.web.servlet.TestDispatcherServlet : Completed initialization in 1 ms
+2024-04-06 13:57:54,227 INFO  [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer : Tomcat started on port 51410 (http) with context path ''
+2024-04-06 13:57:54,234 INFO  [main] ru.netology.diplomcloudstore.DiplomCloudstoreApplicationTests : Started DiplomCloudstoreApplicationTests in 5.341 seconds (process running for 9.16)
+2024-04-06 13:57:54,901 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.saveUserJwtToken.Stage1: Start generate Jwt token...
+2024-04-06 13:57:54,925 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.saveUserJwtToken.Stage2: The Jwt token is generated as 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0aW5nQG1haWwucnUiLCJpYXQiOjE3MTI0MDEwNzQsImV4cCI6MTczMjQwMTA3NH0.weUtSOtv_l7DmKtfQI2Wt7ebChTWS2qPyeKYI-AZK40'
+2024-04-06 13:57:54,936 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.revokeAllUserJwtTokens: Valid Jwt tokens for User:'testing@mail.ru' not found in database
+2024-04-06 13:57:54,936 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.saveUserJwtToken.Stage3: All old Jwt tokens was marked is revoked and expired for user 'testing@mail.ru'
+2024-04-06 13:57:54,954 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.saveUserJwtToken: The Jwt token 'ru.netology.diplomcloudstore.entities.UserJwtTokenEntity@7b6a4052' is generated successful for user:testing@mail.ru
+2024-04-06 13:57:54,955 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.saveUserJwtToken.Stage4: The Jwt token was saved to database jwt-table for user 'testing@mail.ru'
+2024-04-06 13:57:55,036 DEBUG [main] ru.netology.diplomcloudstore.processor.FileProcessor : FileProcessor.store: Catalog 'cloudstore\1\' exists yet
+2024-04-06 13:57:55,037 DEBUG [main] ru.netology.diplomcloudstore.processor.FileProcessor : FileProcessor.store: The file by path 'c:\cloudstore\1\testFile.txt' was created
+2024-04-06 13:57:55,037 DEBUG [main] ru.netology.diplomcloudstore.services.FileStorageService : FileStorageService.storeFile: Th file {c:\cloudstore\1\testFile.txt} was created successful
+2024-04-06 13:57:55,037 DEBUG [main] ru.netology.diplomcloudstore.services.MediaService : MediaService.save.storeFile: The file {c:\cloudstore\1\testFile.txt} was stored.
+2024-04-06 13:57:55,040 DEBUG [main] ru.netology.diplomcloudstore.services.FileEntityService : FileEntityService.saveFileEntity: The row {SAVE} add to table successful. Field 'fullPath' = {c:\cloudstore\1\testFile.txt}
+2024-04-06 13:57:55,040 DEBUG [main] ru.netology.diplomcloudstore.services.MediaService : MediaService.save.saveFileEntity: The row of file {c:\cloudstore\1\testFile.txt} was saved.
+2024-04-06 13:57:55,060 DEBUG [main] ru.netology.diplomcloudstore.processor.FileProcessor : FileProcessor.remove: The file by path 'c:\cloudstore\1\testFile.txt' was deleted from disk
+2024-04-06 13:57:55,068 DEBUG [main] ru.netology.diplomcloudstore.services.FileEntityService : FileEntityService.deleteFileEntity: The row field 'full_path' = {c:\cloudstore\1\testFile.txt} deleted from table 
+2024-04-06 13:57:55,068 DEBUG [main] ru.netology.diplomcloudstore.services.MediaService : MediaService.delete: The file {'c:\cloudstore\1\testFile.txt'} for user {'testing@mail.ru'} was physical deleted from storage and table
+2024-04-06 13:57:55,164 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.saveUserJwtToken.Stage1: Start generate Jwt token...
+2024-04-06 13:57:55,165 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.saveUserJwtToken.Stage2: The Jwt token is generated as 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0aW5nQG1haWwucnUiLCJpYXQiOjE3MTI0MDEwNzUsImV4cCI6MTczMjQwMTA3NX0.25GXLbKABNwXi7TKXvXu7mo-PwzK8trbapDU8wsDU0Q'
+2024-04-06 13:57:55,169 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.revokeAllUserJwtTokens: Valid Jwt tokens for User:'testing@mail.ru' not found in database
+2024-04-06 13:57:55,169 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.saveUserJwtToken.Stage3: All old Jwt tokens was marked is revoked and expired for user 'testing@mail.ru'
+2024-04-06 13:57:55,170 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.saveUserJwtToken: The Jwt token 'ru.netology.diplomcloudstore.entities.UserJwtTokenEntity@625ee079' is generated successful for user:testing@mail.ru
+2024-04-06 13:57:55,171 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.saveUserJwtToken.Stage4: The Jwt token was saved to database jwt-table for user 'testing@mail.ru'
+2024-04-06 13:57:55,185 DEBUG [main] ru.netology.diplomcloudstore.processor.FileProcessor : FileProcessor.store: Catalog 'cloudstore\1\' exists yet
+2024-04-06 13:57:55,186 DEBUG [main] ru.netology.diplomcloudstore.processor.FileProcessor : FileProcessor.store: The file by path 'c:\cloudstore\1\testFile.txt' was created
+2024-04-06 13:57:55,186 DEBUG [main] ru.netology.diplomcloudstore.services.FileStorageService : FileStorageService.storeFile: Th file {c:\cloudstore\1\testFile.txt} was created successful
+2024-04-06 13:57:55,186 DEBUG [main] ru.netology.diplomcloudstore.services.MediaService : MediaService.save.storeFile: The file {c:\cloudstore\1\testFile.txt} was stored.
+2024-04-06 13:57:55,187 DEBUG [main] ru.netology.diplomcloudstore.services.FileEntityService : FileEntityService.saveFileEntity: The row {SAVE} add to table successful. Field 'fullPath' = {c:\cloudstore\1\testFile.txt}
+2024-04-06 13:57:55,187 DEBUG [main] ru.netology.diplomcloudstore.services.MediaService : MediaService.save.saveFileEntity: The row of file {c:\cloudstore\1\testFile.txt} was saved.
+2024-04-06 13:57:55,204 DEBUG [main] ru.netology.diplomcloudstore.processor.FileProcessor : FileProcessor.getFile: The file by path 'c:\cloudstore\1\testFile.txt' was loaded
+2024-04-06 13:57:55,204 DEBUG [main] ru.netology.diplomcloudstore.services.MediaService : MediaService.get: The file {c:\cloudstore\1\testFile.txt} byte size {26} was load successful
+2024-04-06 13:57:55,284 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.saveUserJwtToken.Stage1: Start generate Jwt token...
+2024-04-06 13:57:55,285 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.saveUserJwtToken.Stage2: The Jwt token is generated as 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0aW5nQG1haWwucnUiLCJpYXQiOjE3MTI0MDEwNzUsImV4cCI6MTczMjQwMTA3NX0.25GXLbKABNwXi7TKXvXu7mo-PwzK8trbapDU8wsDU0Q'
+2024-04-06 13:57:55,288 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.revokeAllUserJwtTokens: Valid Jwt tokens for User:'testing@mail.ru' not found in database
+2024-04-06 13:57:55,288 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.saveUserJwtToken.Stage3: All old Jwt tokens was marked is revoked and expired for user 'testing@mail.ru'
+2024-04-06 13:57:55,290 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.saveUserJwtToken: The Jwt token 'ru.netology.diplomcloudstore.entities.UserJwtTokenEntity@27be341b' is generated successful for user:testing@mail.ru
+2024-04-06 13:57:55,290 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.saveUserJwtToken.Stage4: The Jwt token was saved to database jwt-table for user 'testing@mail.ru'
+2024-04-06 13:57:55,303 DEBUG [main] ru.netology.diplomcloudstore.processor.FileProcessor : FileProcessor.store: Catalog 'cloudstore\1\' exists yet
+2024-04-06 13:57:55,304 DEBUG [main] ru.netology.diplomcloudstore.processor.FileProcessor : FileProcessor.store: The file by path 'c:\cloudstore\1\testFile.txt' was created
+2024-04-06 13:57:55,304 DEBUG [main] ru.netology.diplomcloudstore.services.FileStorageService : FileStorageService.storeFile: Th file {c:\cloudstore\1\testFile.txt} was created successful
+2024-04-06 13:57:55,304 DEBUG [main] ru.netology.diplomcloudstore.services.MediaService : MediaService.save.storeFile: The file {c:\cloudstore\1\testFile.txt} was stored.
+2024-04-06 13:57:55,306 DEBUG [main] ru.netology.diplomcloudstore.services.FileEntityService : FileEntityService.saveFileEntity: The row {SAVE} add to table successful. Field 'fullPath' = {c:\cloudstore\1\testFile.txt}
+2024-04-06 13:57:55,306 DEBUG [main] ru.netology.diplomcloudstore.services.MediaService : MediaService.save.saveFileEntity: The row of file {c:\cloudstore\1\testFile.txt} was saved.
+2024-04-06 13:57:55,322 DEBUG [main] ru.netology.diplomcloudstore.processor.FileProcessor : FileProcessor.renameFile: The file was renamed with 'testFile.txt' to 'koala2.jpg'. Path is 'c:\cloudstore\1\koala2.jpg'
+2024-04-06 13:57:55,323 DEBUG [main] ru.netology.diplomcloudstore.services.FileEntityService : FileEntityService.saveFileEntity: The row {UPDATE} add to table successful. Field 'fullPath' = {c:\cloudstore\1\koala2.jpg}
+2024-04-06 13:57:55,407 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.saveUserJwtToken.Stage1: Start generate Jwt token...
+2024-04-06 13:57:55,408 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.saveUserJwtToken.Stage2: The Jwt token is generated as 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0aW5nQG1haWwucnUiLCJpYXQiOjE3MTI0MDEwNzUsImV4cCI6MTczMjQwMTA3NX0.25GXLbKABNwXi7TKXvXu7mo-PwzK8trbapDU8wsDU0Q'
+2024-04-06 13:57:55,410 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.revokeAllUserJwtTokens: Valid Jwt tokens for User:'testing@mail.ru' not found in database
+2024-04-06 13:57:55,411 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.saveUserJwtToken.Stage3: All old Jwt tokens was marked is revoked and expired for user 'testing@mail.ru'
+2024-04-06 13:57:55,413 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.saveUserJwtToken: The Jwt token 'ru.netology.diplomcloudstore.entities.UserJwtTokenEntity@470d3ea4' is generated successful for user:testing@mail.ru
+2024-04-06 13:57:55,413 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.saveUserJwtToken.Stage4: The Jwt token was saved to database jwt-table for user 'testing@mail.ru'
+2024-04-06 13:57:55,432 DEBUG [main] ru.netology.diplomcloudstore.services.FileEntityService : FileEntityService.getListFilesByUserWithLimit: For User {testing@mail.ru} in select query {1} rows found by setting limit {3}
+2024-04-06 13:57:55,432 DEBUG [main] ru.netology.diplomcloudstore.services.MediaService : MediaService.getListFiles: {1} rows found for user {testing@mail.ru} by limit {3}
+2024-04-06 13:57:55,511 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.saveUserJwtToken.Stage1: Start generate Jwt token...
+2024-04-06 13:57:55,512 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.saveUserJwtToken.Stage2: The Jwt token is generated as 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0aW5nQG1haWwucnUiLCJpYXQiOjE3MTI0MDEwNzUsImV4cCI6MTczMjQwMTA3NX0.25GXLbKABNwXi7TKXvXu7mo-PwzK8trbapDU8wsDU0Q'
+2024-04-06 13:57:55,514 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.revokeAllUserJwtTokens: Valid Jwt tokens for User:'testing@mail.ru' not found in database
+2024-04-06 13:57:55,514 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.saveUserJwtToken.Stage3: All old Jwt tokens was marked is revoked and expired for user 'testing@mail.ru'
+2024-04-06 13:57:55,518 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.saveUserJwtToken: The Jwt token 'ru.netology.diplomcloudstore.entities.UserJwtTokenEntity@59c69659' is generated successful for user:testing@mail.ru
+2024-04-06 13:57:55,518 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.saveUserJwtToken.Stage4: The Jwt token was saved to database jwt-table for user 'testing@mail.ru'
+2024-04-06 13:57:55,541 DEBUG [main] ru.netology.diplomcloudstore.processor.FileProcessor : FileProcessor.store: Catalog 'cloudstore\1\' exists yet
+2024-04-06 13:57:55,541 DEBUG [main] ru.netology.diplomcloudstore.processor.FileProcessor : FileProcessor.store: The file by path 'c:\cloudstore\1\testFile.txt' was created
+2024-04-06 13:57:55,542 DEBUG [main] ru.netology.diplomcloudstore.services.FileStorageService : FileStorageService.storeFile: Th file {c:\cloudstore\1\testFile.txt} was created successful
+2024-04-06 13:57:55,542 DEBUG [main] ru.netology.diplomcloudstore.services.MediaService : MediaService.save.storeFile: The file {c:\cloudstore\1\testFile.txt} was stored.
+2024-04-06 13:57:55,544 DEBUG [main] ru.netology.diplomcloudstore.services.FileEntityService : FileEntityService.saveFileEntity: The row {SAVE} add to table successful. Field 'fullPath' = {c:\cloudstore\1\testFile.txt}
+2024-04-06 13:57:55,545 DEBUG [main] ru.netology.diplomcloudstore.services.MediaService : MediaService.save.saveFileEntity: The row of file {c:\cloudstore\1\testFile.txt} was saved.
+2024-04-06 13:57:55,661 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.saveUserJwtToken.Stage1: Start generate Jwt token...
+2024-04-06 13:57:55,662 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.saveUserJwtToken.Stage2: The Jwt token is generated as 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0aW5nQG1haWwucnUiLCJpYXQiOjE3MTI0MDEwNzUsImV4cCI6MTczMjQwMTA3NX0.25GXLbKABNwXi7TKXvXu7mo-PwzK8trbapDU8wsDU0Q'
+2024-04-06 13:57:55,668 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.revokeAllUserJwtTokens: All 1 Jwt tokens for user  was revoked
+2024-04-06 13:57:55,669 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.saveUserJwtToken.Stage3: All old Jwt tokens was marked is revoked and expired for user 'testing@mail.ru'
+2024-04-06 13:57:55,671 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.saveUserJwtToken: The Jwt token 'ru.netology.diplomcloudstore.entities.UserJwtTokenEntity@5dc77210' is generated successful for user:testing@mail.ru
+2024-04-06 13:57:55,672 DEBUG [main] ru.netology.diplomcloudstore.services.JwtService : JwtService.saveUserJwtToken.Stage4: The Jwt token was saved to database jwt-table for user 'testing@mail.ru'
+2024-04-06 13:57:55,735 ERROR [main] ru.netology.diplomcloudstore.services.AuthenticationService : AuthenticationService.authenticate: User can not authenticated. Bad credentials
+2024-04-06 13:57:55,767 INFO  [docker-java-stream-1192190679] ru.netology.diplomcloudstore.DiplomCloudstoreApplicationTests : STDERR: 2024-04-06 10:57:55.764 UTC [70] FATAL:  terminating connection due to unexpected postmaster exit
+2024-04-06 13:57:55,767 INFO  [docker-java-stream-1192190679] ru.netology.diplomcloudstore.DiplomCloudstoreApplicationTests : STDERR: 2024-04-06 10:57:55.764 UTC [73] FATAL:  terminating connection due to unexpected postmaster exit
+2024-04-06 13:57:55,767 INFO  [docker-java-stream-1192190679] ru.netology.diplomcloudstore.DiplomCloudstoreApplicationTests : STDERR: 2024-04-06 10:57:55.764 UTC [75] FATAL:  terminating connection due to unexpected postmaster exit
+2024-04-06 13:57:55,767 INFO  [docker-java-stream-1192190679] ru.netology.diplomcloudstore.DiplomCloudstoreApplicationTests : STDERR: 2024-04-06 10:57:55.764 UTC [78] FATAL:  terminating connection due to unexpected postmaster exit
+2024-04-06 13:57:55,768 INFO  [docker-java-stream-1192190679] ru.netology.diplomcloudstore.DiplomCloudstoreApplicationTests : STDERR: 2024-04-06 10:57:55.764 UTC [77] FATAL:  terminating connection due to unexpected postmaster exit
+2024-04-06 13:57:55,768 INFO  [docker-java-stream-1192190679] ru.netology.diplomcloudstore.DiplomCloudstoreApplicationTests : STDERR: 2024-04-06 10:57:55.764 UTC [74] FATAL:  terminating connection due to unexpected postmaster exit
+2024-04-06 13:57:55,768 INFO  [docker-java-stream-1192190679] ru.netology.diplomcloudstore.DiplomCloudstoreApplicationTests : STDERR: 2024-04-06 10:57:55.764 UTC [76] FATAL:  terminating connection due to unexpected postmaster exit
+2024-04-06 13:57:55,768 INFO  [docker-java-stream-1192190679] ru.netology.diplomcloudstore.DiplomCloudstoreApplicationTests : STDERR: 2024-04-06 10:57:55.765 UTC [72] FATAL:  terminating connection due to unexpected postmaster exit
+2024-04-06 13:57:55,768 INFO  [docker-java-stream-1192190679] ru.netology.diplomcloudstore.DiplomCloudstoreApplicationTests : STDERR: 2024-04-06 10:57:55.765 UTC [69] FATAL:  terminating connection due to unexpected postmaster exit
+2024-04-06 13:57:56,756 ERROR [main] ru.netology.diplomcloudstore.services.CurrentUserService : CurrentUserService.getCurrentUser: The user 'null' not found in database
+2024-04-06 13:57:57,004 DEBUG [main] ru.netology.diplomcloudstore.services.MediaService : MediaService.save.isPresent: The file {c:\345\test.pdf} exists yet.
+2024-04-06 13:57:57,004 DEBUG [main] ru.netology.diplomcloudstore.services.MediaService : MediaService.save.removeFileFromStorage: The file {c:\345\test.pdf} was removed.
+2024-04-06 13:57:57,013 DEBUG [main] ru.netology.diplomcloudstore.services.MediaService : MediaService.get: The file {C:\3\test.pdf} byte size {30} was load successful
+2024-04-06 13:57:57,024 DEBUG [main] ru.netology.diplomcloudstore.services.MediaService : MediaService.getListFiles: {2} rows found for user {null} by limit {3}
+2024-04-06 13:57:57,047 DEBUG [main] ru.netology.diplomcloudstore.processor.FileProcessor : FileProcessor.getFile: The file by path 'C:\Programming\Netology\Projects\_diplom\diplom-cloudstore\src\test\java\ru\netology\diplomcloudstore\unit\testfiles\test-files-size.txt' was loaded
+2024-04-06 13:57:57,048 DEBUG [main] ru.netology.diplomcloudstore.processor.FileProcessor : FileProcessor.store: Catalog 'Programming\Netology\Projects\_diplom\diplom-cloudstore\src\test\java\ru\netology\diplomcloudstore\unit\testfiles\1\' exists yet
+2024-04-06 13:57:57,049 DEBUG [main] ru.netology.diplomcloudstore.processor.FileProcessor : FileProcessor.store: The file by path 'C:\Programming\Netology\Projects\_diplom\diplom-cloudstore\src\test\java\ru\netology\diplomcloudstore\unit\testfiles\1\test.txt' was created
+2024-04-06 13:57:57,051 DEBUG [main] ru.netology.diplomcloudstore.processor.FileProcessor : FileProcessor.getFile: The file by path 'C:\Programming\Netology\Projects\_diplom\diplom-cloudstore\src\test\java\ru\netology\diplomcloudstore\unit\testfiles\test-files-size.txt' was loaded
+2024-04-06 13:57:57,051 DEBUG [main] ru.netology.diplomcloudstore.processor.FileProcessor : FileProcessor.store: Catalog 'Programming\Netology\Projects\_diplom\diplom-cloudstore\src\test\java\ru\netology\diplomcloudstore\unit\testfiles\3\' exists yet
+2024-04-06 13:57:57,052 DEBUG [main] ru.netology.diplomcloudstore.processor.FileProcessor : FileProcessor.store: The file by path 'C:\Programming\Netology\Projects\_diplom\diplom-cloudstore\src\test\java\ru\netology\diplomcloudstore\unit\testfiles\3\test_for_removed.txt' was created
+2024-04-06 13:57:57,052 DEBUG [main] ru.netology.diplomcloudstore.processor.FileProcessor : FileProcessor.remove: The file by path 'C:\Programming\Netology\Projects\_diplom\diplom-cloudstore\src\test\java\ru\netology\diplomcloudstore\unit\testfiles\3\test_for_removed.txt' was deleted from disk
+2024-04-06 13:57:57,053 ERROR [main] ru.netology.diplomcloudstore.processor.FileProcessor : FileProcessor.getFile.checkFileOnDisk: The file by fullpath = 'C:\Programming\Netology\Projects\_diplom\diplom-cloudstore\src\test\java\ru\netology\diplomcloudstore\unit\testfiles\3\test_for_removed.txt' not found in storehouse disk
+2024-04-06 13:57:57,057 DEBUG [main] ru.netology.diplomcloudstore.processor.FileProcessor : FileProcessor.getFile: The file by path 'C:\Programming\Netology\Projects\_diplom\diplom-cloudstore\src\test\java\ru\netology\diplomcloudstore\unit\testfiles\test-files-size.txt' was loaded
+2024-04-06 13:57:57,058 ERROR [main] ru.netology.diplomcloudstore.processor.FileProcessor : FileProcessor.get: Null path in argument 'null'
+2024-04-06 13:57:57,059 ERROR [main] ru.netology.diplomcloudstore.processor.FileProcessor : FileProcessor.get: Null path in argument ''
+2024-04-06 13:57:57,061 DEBUG [main] ru.netology.diplomcloudstore.processor.FileProcessor : FileProcessor.getFile: The file by path 'C:\Programming\Netology\Projects\_diplom\diplom-cloudstore\src\test\java\ru\netology\diplomcloudstore\unit\testfiles\test-files-size.txt' was loaded
+2024-04-06 13:57:57,062 DEBUG [main] ru.netology.diplomcloudstore.processor.FileProcessor : FileProcessor.store: Catalog 'Programming\Netology\Projects\_diplom\diplom-cloudstore\src\test\java\ru\netology\diplomcloudstore\unit\testfiles\2\' exists yet
+2024-04-06 13:57:57,062 DEBUG [main] ru.netology.diplomcloudstore.processor.FileProcessor : FileProcessor.store: The file by path 'C:\Programming\Netology\Projects\_diplom\diplom-cloudstore\src\test\java\ru\netology\diplomcloudstore\unit\testfiles\2\test.txt' was created
+2024-04-06 13:57:57,063 DEBUG [main] ru.netology.diplomcloudstore.processor.FileProcessor : FileProcessor.renameFile: The file was renamed with 'test.txt' to 'test_renamed.txt'. Path is 'C:\Programming\Netology\Projects\_diplom\diplom-cloudstore\src\test\java\ru\netology\diplomcloudstore\unit\testfiles\2\test_renamed.txt'
+2024-04-06 13:57:57,102 INFO  [SpringApplicationShutdownHook] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-04-06 13:57:57,105 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown initiated...
+2024-04-06 13:57:57,109 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown completed.
